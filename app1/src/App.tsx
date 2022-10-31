@@ -1,15 +1,14 @@
-import React, {createElement as e, useEffect, useState} from 'react';
+import {Loader} from './components/Loader'
 import {Product} from './components/product'
-import {products} from './data/products'
+import { useProducts } from './hooks/product';
 
 function App() {
-
-  useEffect( () => {
-    console.log('effect')
-  }, [])
+  const { loading, error, products} = useProducts()
 
   return (
     <div className='container mx-auto max-w-2xl pt-5'>
+      { loading && <Loader /> }
+      { error && <p className='text-center text-red-600'> {error} </p> }
       { products.map(product => <Product product={product} key={product.id} />) }
 
       {/* <Product product={products[0]} />
